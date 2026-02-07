@@ -190,6 +190,194 @@ img.profile {
   box-shadow: 0 0 8px var(--purple);
 }
 
+/* Volume Control */
+.volume-control {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--purple-faint);
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--purple);
+  box-shadow: 0 0 8px var(--purple);
+  z-index: 100;
+  width: 44px; /* collapsed width showing only icon */
+  overflow: hidden;
+  transition: width 240ms ease, padding 200ms ease;
+}
+
+.volume-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--purple-light);
+  flex-shrink: 0;
+}
+
+.volume-slider {
+  width: 100px;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--purple-dark);
+  outline: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+/* hide slider when collapsed */
+.volume-control .volume-slider {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 200ms ease;
+}
+
+.volume-control:hover {
+  width: 150px; /* expanded */
+  padding: 8px 14px;
+}
+
+.volume-control:hover .volume-slider {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* stacked layout for slider + button */
+.volume-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Enable Audio button */
+.enable-audio {
+  position: fixed;
+  top: 20px;
+  left: 84px;
+  background: linear-gradient(180deg, var(--purple) 0%, var(--purple-dark) 100%);
+  color: #fff;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(122,20,255,0.12);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.9rem;
+  transition: opacity 200ms ease, transform 120ms ease;
+  z-index: 200;
+}
+.enable-audio.hidden { display: none; }
+.enable-audio:active { transform: translateY(1px); }
+
+/* Play/Pause button */
+.play-pause {
+  display: inline-block;
+  width: 120px;
+  text-align: center;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 8px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 6px 18px rgba(134,75,255,0.12), inset 0 1px 0 rgba(255,255,255,0.03);
+  transition: transform 120ms ease, box-shadow 120ms ease, opacity 220ms ease;
+}
+.play-pause:active { transform: translateY(1px) scale(0.995); }
+
+/* Play container sits below the volume control and is not part of the hover expansion */
+.play-container {
+  position: fixed;
+  left: 1px;
+  top: 84px; /* placed just below the expanded volume control */
+  z-index: 110;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 140px;
+}
+
+/* Intro overlay shown on first load to get a user gesture */
+.intro-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(6,6,10,0.55);
+  backdrop-filter: blur(8px) saturate(120%);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+  z-index: 9999;
+  cursor: pointer;
+  transition: opacity 480ms cubic-bezier(.2,.9,.2,1), backdrop-filter 480ms cubic-bezier(.2,.9,.2,1);
+}
+.intro-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.intro-overlay .overlay-text {
+  color: white;
+  font-size: 1.15rem;
+  padding: 18px 28px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(122,20,255,0.12), rgba(76,0,255,0.08));
+  border: 1px solid rgba(255,255,255,0.04);
+  box-shadow: 0 8px 30px rgba(30,0,80,0.36);
+  backdrop-filter: blur(4px);
+  transition: transform 420ms cubic-bezier(.2,.9,.2,1), opacity 320ms ease;
+}
+.intro-overlay.hidden .overlay-text {
+  transform: translateY(6px) scale(0.996);
+  opacity: 0;
+}
+/* Keep the enable-audio button hidden visually while leaving it in the DOM
+  (useful for debugging or restoring behavior later) */
+/* allow JS to reveal the button when necessary by toggling the 'hidden' class */
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--purple);
+  cursor: pointer;
+  box-shadow: 0 0 8px var(--purple);
+  transition: all 0.2s ease;
+}
+
+.volume-slider::-webkit-slider-thumb:hover {
+  background: var(--purple-light);
+  box-shadow: 0 0 12px var(--purple-light);
+  transform: scale(1.2);
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--purple);
+  cursor: pointer;
+  box-shadow: 0 0 8px var(--purple);
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.volume-slider::-moz-range-thumb:hover {
+  background: var(--purple-light);
+  box-shadow: 0 0 12px var(--purple-light);
+  transform: scale(1.2);
+}
+
+.volume-slider::-moz-range-track {
+  background: transparent;
+  border: none;
+}
+
 /* Inner Info Box */
 .inner-box {
   margin-top: 2rem;
