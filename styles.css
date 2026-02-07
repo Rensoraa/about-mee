@@ -144,6 +144,12 @@ img.profile {
   width: 24px;
   height: 24px;
 }
+.discord svg.social-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 12px;
+  flex-shrink: 0;
+}
 .copy-box {
   display: flex;
   align-items: center;
