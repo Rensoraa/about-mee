@@ -439,6 +439,18 @@ img.profile {
   line-height: 1.4;
   padding: 0 10px;
 }
+.ranked {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* center horizontally */
+  gap: 10px;
+  font-size: 1rem;
+  line-height: 1.4;
+  padding: 0 10px;
+  text-align: center;    /* center text */
+}
+
 .about-row {
   display: flex;
   gap: 10px;

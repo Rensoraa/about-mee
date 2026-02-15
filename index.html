@@ -113,6 +113,127 @@
         </div>
       </div>
     </div>
+    
+    <!-- Ranked-->
+<div class="inner-box">
+  <strong>Valorant Ranked</strong>
+      <div> </div>
+    --------------
+  <div class="ranked" id="valorant-rank" style="width: 100%;">
+    <div class="ranked-row" style="display: flex; justify-content: space-between; align-items: flex-start; width: 100%;">
+      
+      <!-- Current Rank Left -->
+      <div style="text-align: left; flex:1;">
+        <span class="label">Current Rank:</span> <span id="current-rank">Loading...</span>
+
+        <!-- Rank Image -->
+        <div style="text-align:center; margin: 8px 0;">
+          <img id="rank-image" src="" alt="Rank Image" style="max-height:80px; display:block; margin: 0 auto;">
+        </div>
+
+        <!-- Current RR -->
+        <div id="current-rr" style="text-align:center; font-size:0.9rem;">
+          0 / 100
+        </div>
+
+        <!-- Last Game Gain -->
+        <div id="last-mmr" class="mmr-change" style="text-align:center;">
+          +0
+        </div>
+      </div>
+
+      <!-- Peak Rank Right -->
+      <div style="flex:1; display:flex; flex-direction: column; align-items: center;">
+        <span class="label">Peak Rank:</span>
+        <!-- Peak Rank Image -->
+        <div style="margin: 8px 0; text-align:center;">
+          <img id="peak-rank-image" src="https://media.valorant-api.com/competitivetiers/03621f52-342b-cf4e-4f86-9350a49c6d04/16/largeicon.png" alt="Peak Rank Image" style="max-height:80px; display:block; margin: 0 auto;">
+        </div>
+        <!-- Peak Rank Text -->
+        <div style="text-align:center;"><strong>Platinum 2</strong><br>90 / 100</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Smaller Last MMR Change with Purple Glow */
+  .mmr-change {
+    font-size: 0.8rem;
+    color: var(--purple);
+    text-shadow: 0 0 6px var(--purple);
+    margin-top: 2px;
+  }
+
+  /* Center text above the image for current rank */
+  #valorant-rank .ranked-row > div:first-child {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #valorant-rank .ranked-row > div:first-child img {
+    order: 2;
+    margin: 8px 0;
+  }
+
+  #valorant-rank .ranked-row > div:first-child #current-rank,
+  #valorant-rank .ranked-row > div:first-child #current-rr,
+  #valorant-rank .ranked-row > div:first-child #last-mmr {
+    order: 1;
+    text-align: center;
+  }
+
+  /* Center peak rank text below the image */
+  #valorant-rank .ranked-row > div:last-child {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+</style>
+
+<script>
+  async function fetchValorantRank() {
+    const username = "NAME"; // replace with actual username
+    const tag = "165hz";     // replace with actual tag
+    const apiKey = "HDEV-7271bd4f-5054-477c-bf2b-0267b3cfd4df"; 
+
+    const url = `https://api.henrikdev.xyz/valorant/v2/mmr/eu/${username}/${tag}?api_key=${apiKey}`;
+
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("API request failed");
+      const data = await res.json();
+
+      const currentTier = data.data.current_data.currenttierpatched || "Unknown";
+      const rankInTier = data.data.current_data.ranking_in_tier || 0;
+      const currentRRValue = rankInTier; // total RR / 100 can be customized
+      const currentRRMax = 100; // max per tier
+      const lastGain = data.data.current_data.mmr_change_to_last_game || 0;
+      const rankImage = data.data.current_data.images.large || "";
+
+      // Update HTML
+      document.getElementById("current-rank").textContent = `${currentTier}`;
+      document.getElementById("rank-image").src = rankImage;
+      document.getElementById("current-rr").textContent = `${currentRRValue} / ${currentRRMax}`;
+      document.getElementById("last-mmr").textContent = lastGain >= 0 ? `+${lastGain}` : lastGain;
+
+      // Peak rank image is already hardcoded from your URL
+    } catch (err) {
+      console.error("Error fetching Valorant MMR:", err);
+      document.getElementById("current-rank").textContent = "Error";
+      document.getElementById("current-rr").textContent = "- / 100";
+      document.getElementById("last-mmr").textContent = "-";
+    }
+  }
+
+  fetchValorantRank();
+</script>
+
+
+
+    
     <!-- About Me Box -->
     <div class="inner-box">
       <strong>About Me</strong>
