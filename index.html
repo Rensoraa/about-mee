@@ -20,11 +20,10 @@
 <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 </head>
 <body>
-<div class="site-fade-in">
-  <!-- Intro overlay: click to get to know more (also acts as manual unmute gesture) -->
+<!-- commented out because i need to fix some shit<div class="site-fade-in">
   <div id="introOverlay" class="intro-overlay">
     <div class="overlay-text">Click to get to know more about me</div>
-  </div>
+  </div>-->
   
   <!-- Volume Control -->
   <div class="volume-control">
@@ -35,6 +34,9 @@
       <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="40">
     </div>
   </div>
+  <video class="bg-video" autoplay muted loop playsinline>
+  <source src="https://cdn.jumpshare.com/preview/8wHH9-jg0g6YuemQXgThFQkzNOoWCIOF22alXiHl5zAJvE-6mDX0taMFDMFN4odD3kBwMA17vzU86L-yFxwaEq8-jACVtiajxk1c2lnWebQJvAlgXyEgZklQyRrBXaY97yv55joZKx2IK_XhfMjurm6yjbN-I2pg_cnoHs_AmgI.mp4" type="video/mp4">
+</video>
 
   <!-- Play/Pause button placed below the volume control (outside the slider animation) -->
   <div class="play-container">
