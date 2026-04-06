@@ -462,11 +462,7 @@ img.profile {
   color: var(--purple);
 }
 
-/* Fade-in effect for entire site */
-.site-fade-in {
-  opacity: 0;
-  animation: fadeWholeSiteIn 2.5s ease-out forwards;
-}
+
 @keyframes fadeWholeSiteIn {
   to { opacity: 1; }
 }
@@ -606,18 +602,6 @@ img.profile {
   height: 100%;
   object-fit: cover;   /* makes it fill screen nicely */
   z-index: -1;
-}
-
-/* Optional dark overlay for readability */
-body::after {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.4); /* adjust darkness */
-  z-index: 0;
 }
 
 /* Your main content */
